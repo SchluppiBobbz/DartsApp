@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-"""Main module."""
-import time
-import datetime
-from collections import defaultdict, namedtuple
-
+# -*- coding: utf-8 -*- """Main module.""" import time import datetime from collections import defaultdict, namedtuple 
 class DartGame(object):
     players = None
     actual_player = None
-    
     def __init__(self):
         self.round = 0
         self.players = []
