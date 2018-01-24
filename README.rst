@@ -28,7 +28,14 @@ Dartsapp for steel dart play.
 Features
 --------
 
-* TODO
+* Dartsapp counts your throws for you in x01-type-games
+
+To Come
+-------
+* Dartsapp tracks your progess and gives motivation
+* Dartsapp listens to your voice to save results
+* Dartsapp can be installed on your server and be played from every 
+browser within your network
 
 Credits
 ---------
