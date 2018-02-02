@@ -6,7 +6,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   how_to_play_x01
+   notebooks/index
    readme
    installation
    usage

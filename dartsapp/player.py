@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Player module."""
+import datetime
 
 class Player(object):
     

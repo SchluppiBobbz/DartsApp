@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*- """Main module.""" import time import datetime from collections import defaultdict, namedtuple 
+from dartsapp import darts_helper
+from dartsapp.exceptions import *
 
 
 class DartGame(object):
@@ -60,7 +62,7 @@ class x01(DartGame):
     def __init__(self):
         super().__init__()
         self.started = 0
-        self.initialized = 0
+        self.options_set = 0
     
     def set_options(self, variation=5, finish_type=2, opening_type=1):
         """Set options of x01
@@ -84,15 +86,20 @@ class x01(DartGame):
 
         assert isinstance(variation, int), "Integer required."
         self.target_points = int("%s01" % variation)    
-        self.initialized = 1
+        self.options_set = 1
         self.finish_type =  finish_type
         self.opening_type = opening_type
         
     def start(self):
         """Start the game
         """
+        if not self.players:
+            raise NoPlayerRegistered()
+            
+        if not self.options_set:
+            raise OptionsNotSet()
 
-        if self.players and self.initialized:
+        if self.players and self.options_set:
             # Set All Points to 0
             for player in self.players:
                 player.scoreboard = self.target_points
@@ -102,7 +109,7 @@ class x01(DartGame):
             self.player_counter = 0
             self.next_player()
         else:
-            if not self.initialized:
+            if not self.options_set:
                 print ("ERROR: Game-Options not set.")
             if not self.players:
                 print ("ERROR: No Players are registered.")
@@ -127,7 +134,7 @@ class x01(DartGame):
         self.actual_player.new_darts(self.number_of_darts)
         
     
-    def throw_dart(self, throw):
+    def throw_dart(self, value, field_type):
         """Throw your dart
         
         Arguments:
@@ -136,7 +143,7 @@ class x01(DartGame):
 
         """
 
-            
+        throw = darts_helper.Throw(value, field_type)
         self.actual_player.throw_dart(throw)
         
         # TODO: Double/Trible in

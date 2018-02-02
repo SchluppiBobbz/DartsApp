@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Throw module."""
-
+"""COllection of Dart-helpers"""
+from dartsapp.exceptions import BullseyeHasNoTriple, ValueDoesNotExist, FieldDoesNotExist
 
 class Throw(object):
     """This class is all about the Throw:
@@ -26,14 +26,17 @@ class Throw(object):
         Raises:
             AttributeError -- Bull has only Single or Double, no Triple
         """
+        if  value not in self.AVAILABLE_VALUES:
+            raise ValueDoesNotExist()
+        self.value = value
+        
 
-        if value in self.AVAILABLE_VALUES:
-            self.value = value
-        if field_type in self.AVAILABLE_FIELDS.keys():
-            self.field_type = field_type
+        if field_type not in self.AVAILABLE_FIELDS.keys():
+            raise FieldDoesNotExist()
+        self.field_type = field_type
         
         if self.value == 25 and self.field_type == 3:
-            raise AttributeError("A triple-Bull does not exist.")
+            raise BullseyeHasNoTriple("A triple-Bull does not exist.")
         else:
             self.points = self.value * self.field_type
     
